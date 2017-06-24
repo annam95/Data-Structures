@@ -13,7 +13,7 @@ class BinaryTree
 {
 private:
     Node *root_m;
-    std::queue<Node> levelQueue; 
+
 public:
     BinaryTree(Node *root) : root_m(root); 
     {
@@ -23,6 +23,8 @@ public:
     {
         if (!root_m)
             return;
+
+        std::queue<Node> levelQueue; 
         
         levelQueue.push(*root_m);
 
@@ -46,17 +48,52 @@ public:
 
     void InOrderTraversal()
     {
+        InOrderTraversal(root_m);
+    }
 
+    void InOrderTraversal(Node *node)
+    {
+        InOrderTraversal(node->left);
+
+        if (node)
+            std::cout << node->data << " ";
+        else
+            return;
+
+        InOrderTraversal(node->right);
     }
 
     void PreOrderTraversal()
     {
+        PreOrderTraversal(root_m);    
+    }
 
+
+    void PreOrderTraversal(Node *node)
+    {
+        if (node)
+            std::cout << node->data << " ";
+        else
+            return;
+
+        PreOrderTraversal(node->left);
+        PreOrderTraversal(node->right);
     }
 
     void PostOrderTraversal()
     {
+        PostOrderTraversal(root_m);    
+    }
 
+    void PostOrderTraversal(Node *node)
+    {
+        PostOrderTraversal(node->left);
+        PostOrderTraversal(node->right);
+
+        if (node)
+            std::cout << node->data << " ";
+        else
+            return;
     }
 
     void DeleteNode()
